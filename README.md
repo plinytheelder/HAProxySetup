@@ -61,6 +61,16 @@ refresh_pattern . 0 40% 40320
 
 Note that you will have to comment out the old `refresh_pattern .` line.
 
+*Tuning Squid for High Volume*
+
+For some, Squid might not be able to keep up with heavy demand and could drop or fail to establish connections. Do determine if this is the case, check Squid performance with the following:
+
+```
+service squid status
+```
+
+If the result is `WARNING! Your cache is running out of filedescriptors` then increase the `max_filedescriptors` parameter in your config, located `/etc/squid/squid.conf`. You may also need to adjust the open file limit on your server as well.
+
 --------------------------------------------------
 Save a backup the config file: /etc/haproxy/haproxy.cfg as haproxy.cfg.old
 Remove everything in the haproxy.cfg and add the below text. Read the comments to make changes for your setup.
